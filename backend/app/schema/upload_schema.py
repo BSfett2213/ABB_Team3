@@ -7,6 +7,7 @@ class DatasetMetadata(BaseModel):
     start_timestamp: str
     end_timestamp: str
 
+#response wrapper (encapsulation)
 class UploadResponse(BaseModel):
     status: str
     metadata: DatasetMetadata

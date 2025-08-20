@@ -5,10 +5,8 @@ router = APIRouter()
 
 @router.post("/")
 async def upload_dataset(file: UploadFile = File(...)):
-    """
-    Upload Kaggle dataset (CSV), validate schema, add synthetic timestamps,
-    and return metadata summary.
-    """
+    # uploads dataset, validates it's schema and adds timestamps as instructed
+
     if not file.filename.endswith(".csv"):
         raise HTTPException(status_code=400, detail="File must be a CSV")
 

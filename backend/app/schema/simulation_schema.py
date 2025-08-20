@@ -5,6 +5,7 @@ class SimulationRequest(BaseModel):
     simulationStart: date
     simulationEnd: date
 
+#row by row pred results
 class SimulationRecord(BaseModel):
     timestamp: str
     sample_id: str

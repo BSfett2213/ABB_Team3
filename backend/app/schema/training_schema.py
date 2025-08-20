@@ -7,6 +7,7 @@ class TrainingRequest(BaseModel):
     testStart: date
     testEnd: date
 
+#eval metrics of training
 class TrainingResult(BaseModel):
     accuracy: float
     precision: float

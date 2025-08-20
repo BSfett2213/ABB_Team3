@@ -1,8 +1,3 @@
-"""
-Simple in-memory storage for dataset and models.
-Not persistent – resets when the backend restarts.
-"""
-
 DATASET = None
 TRAINED_MODEL = None
 METRICS = None

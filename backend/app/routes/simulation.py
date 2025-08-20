@@ -7,10 +7,7 @@ router = APIRouter()
 
 @router.post("/")
 async def start_simulation(request: SimulationRequest):
-    """
-    Start real-time prediction simulation.
-    Streams row-by-row predictions.
-    """
+    # for real time prediction, runs row by row
     try:
         generator = simulation_service.run_simulation(request.dict())
         return StreamingResponse(generator, media_type="application/json")

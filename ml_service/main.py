@@ -14,11 +14,6 @@ app = FastAPI(title="ML Service")
 MODEL_PATH = "model.pkl"
 FEATURES_PATH = "features.pkl"
 
-
-# ==============================
-# Request Schemas
-# ==============================
-
 class TrainRequest(BaseModel):
     trainStart: str
     trainEnd: str
@@ -27,13 +22,7 @@ class TrainRequest(BaseModel):
 
 
 class PredictRequest(BaseModel):
-    # Flexible payload – any sensor values + timestamp + ID
     data: Dict
-
-
-# ==============================
-# In-memory Dataset (from Backend)
-# ==============================
 
 DATASET = None
 
@@ -44,26 +33,22 @@ def load_dataset():
     return DATASET
 
 
+# endpoint for loading data
 @app.post("/load-dataset")
 def load_dataset_from_backend(dataset: List[Dict]):
-    """
-    Backend pushes dataset here after preprocessing (with synthetic timestamps).
-    """
+    # load dataset for training after adding timestamp
     global DATASET
     DATASET = pd.DataFrame(dataset)
     return {"status": "Dataset loaded into ML service", "records": len(DATASET)}
 
 
-# ==============================
-# Training Endpoint
-# ==============================
-
+# endpoint for training model
 @app.post("/train-model")
 def train_model(request: TrainRequest):
     try:
         df = load_dataset()
 
-        # Filter training and testing sets
+        # set training and testing sets
         train_df = df[(df["synthetic_timestamp"] >= request.trainStart) &
                       (df["synthetic_timestamp"] <= request.trainEnd)]
         test_df = df[(df["synthetic_timestamp"] >= request.testStart) &
@@ -82,11 +67,11 @@ def train_model(request: TrainRequest):
         model = XGBClassifier(use_label_encoder=False, eval_metric="logloss")
         model.fit(X_train, y_train)
 
-        # Save model + feature order
+        # save model
         joblib.dump(model, MODEL_PATH)
         joblib.dump(list(X_train.columns), FEATURES_PATH)
 
-        # Evaluate
+        # eval model performance
         y_pred = model.predict(X_test)
 
         metrics = {
@@ -102,11 +87,7 @@ def train_model(request: TrainRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
-# ==============================
-# Prediction Endpoint
-# ==============================
-
+# endpoint for predictions
 @app.post("/predict")
 def predict(req: PredictRequest):
     try:
@@ -117,8 +98,6 @@ def predict(req: PredictRequest):
         features = joblib.load(FEATURES_PATH)
 
         df = pd.DataFrame([req.data])
-
-        # Align with training features
         df = df.reindex(columns=features, fill_value=0)
 
         prediction = model.predict(df)[0]

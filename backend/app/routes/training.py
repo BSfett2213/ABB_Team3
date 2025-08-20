@@ -6,10 +6,7 @@ router = APIRouter()
 
 @router.post("/")
 async def train_model(request: TrainingRequest):
-    """
-    Trigger model training by forwarding to ML service.
-    Returns evaluation metrics + charts.
-    """
+    # starts training process
     try:
         results = model_service.train_and_evaluate(request.dict())
         return {"status": "success", "results": results}

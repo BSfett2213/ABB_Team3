@@ -5,10 +5,7 @@ from app.services.dataset_service import get_dataset
 from app.config import ML_SERVICE_URL
 
 def run_simulation(request):
-    """
-    Stream simulation records row-by-row, 1 per second.
-    Calls ML service for predictions.
-    """
+    # gets preds
     df = get_dataset()
 
     start = request["simulationStart"]

@@ -1,10 +1,7 @@
 from app.services.dataset_service import get_dataset
 
 def validate_ranges(request):
-    """
-    Validate date ranges: sequential, non-overlapping, within bounds.
-    Count rows per range.
-    """
+    # used to validate if data is sequential, non overlapping and within range
     df = get_dataset()
 
     training = request["training"]

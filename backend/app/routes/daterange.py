@@ -6,10 +6,7 @@ router = APIRouter()
 
 @router.post("/validate")
 async def validate_date_ranges(request: DateRangeRequest):
-    """
-    Validate training/testing/simulation date ranges.
-    Returns counts per range and status.
-    """
+    #     Validate training/testing/simulation date ranges.
     try:
         result = validation_service.validate_ranges(request.dict())
         return {"status": "success", "validation": result}
