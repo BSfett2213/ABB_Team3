@@ -2,7 +2,7 @@ import time
 import json
 import requests
 from app.services.dataset_service import get_dataset
-from app.config import ML_SERVICE_URL
+from app.config import settings
 
 def run_simulation(request):
     # gets preds
@@ -14,7 +14,7 @@ def run_simulation(request):
     sim_df = df[(df["synthetic_timestamp"] >= start) &
                 (df["synthetic_timestamp"] <= end)]
 
-    url = f"{ML_SERVICE_URL}/predict"
+    url = f"{settings.ML_SERVICE_URL}/predict"
 
     for _, row in sim_df.iterrows():
         # Call ML service for prediction

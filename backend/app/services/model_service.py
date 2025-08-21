@@ -1,9 +1,9 @@
 import requests
-from app.config import ML_SERVICE_URL
+from app.config import settings
 
 def train_and_evaluate(request):
     # tell model to start training
-    url = f"{ML_SERVICE_URL}/train-model"
+    url = f"{settings.ML_SERVICE_URL}/train-model"
     response = requests.post(url, json=request)
 
     if response.status_code != 200:
