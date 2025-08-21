@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from backend.app.schema.daterange_schema import DateRangeRequest
-from backend.app.services import validation_service
+from app.schema.daterange_schema import DateRangeRequest
+from app.services import validation_service
 
 router = APIRouter()
 

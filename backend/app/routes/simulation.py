@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
-from backend.app.schema.simulation_schema import SimulationRequest
-from backend.app.services import simulation_service
+from app.schema.simulation_schema import SimulationRequest
+from app.services import simulation_service
 
 router = APIRouter()
 

@@ -1,8 +1,8 @@
 import time
 import json
 import requests
-from backend.app.services.dataset_service import get_dataset
-from backend.app.config import ML_SERVICE_URL
+from app.services.dataset_service import get_dataset
+from app.config import ML_SERVICE_URL
 
 def run_simulation(request):
     # gets preds

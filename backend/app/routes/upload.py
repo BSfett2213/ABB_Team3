@@ -1,5 +1,5 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from backend.app.services import dataset_service
+from app.services import dataset_service
 
 router = APIRouter()
 
