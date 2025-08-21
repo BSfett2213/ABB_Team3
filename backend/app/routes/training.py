@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from app.schemas.training_schema import TrainingRequest
-from app.services import model_service
+from backend.app.schema.training_schema import TrainingRequest
+from backend.app.services import model_service
 
 router = APIRouter()
 

@@ -1,4 +1,4 @@
-from app.services.dataset_service import get_dataset
+from backend.app.services.dataset_service import get_dataset
 
 def validate_ranges(request):
     # used to validate if data is sequential, non overlapping and within range

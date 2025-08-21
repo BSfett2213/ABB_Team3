@@ -1,5 +1,6 @@
 import requests
-from app.config import ML_SERVICE_URL
+import backend.app
+from backend.app.config import ML_SERVICE_URL
 
 def train_and_evaluate(request):
     # tell model to start training
